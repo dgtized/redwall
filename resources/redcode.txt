@@ -8,8 +8,8 @@ label = #'[a-zA-Z_][a-zA-Z0-9_]*'
 operation = opcode | opcode <'.'> modifier
 <opcode> =
         'DAT' | 'MOV' | 'ADD' | 'SUB' | 'MUL' | 'DIV' | 'MOD' |
-        'JMP' | 'JMZ' | 'JMN' | 'DJN' | 'CMP' | 'SLT' | 'SPL' |
-        'ORG' | 'EQU' | 'END'
+        'JMP' | 'JMZ' | 'JMN' | 'DJN' | 'CMP' | 'SEQ' | 'SLT' | 'SNE'
+        'SPL' | 'ORG' | 'EQU' | 'END'
 <modifier> = 'A' | 'B' | 'AB' | 'BA' | 'F' | 'X' | 'I'
 args = address? | address <','> address
 address = mode? expr
