@@ -12,7 +12,8 @@
         edge 0.05
         size (- 1.0 edge)]
     [:svg {:view-box (str "0 0 " box " " box) :width 1280 :height 768}
-     (for [i (range cells) :let [x (mod i c) y (quot i c)] ]
+     (for [i (range cells)
+           :let [x (mod i c) y (quot i c)] ]
        [:rect {:x (+ x edge) :y (+ y edge)
                :width size :height size
                :key (str "m" i)
