@@ -1,22 +1,24 @@
 (ns redwall.core
-    (:require [reagent.core :as reagent :refer [atom]]))
+  (:require [reagent.core :as r]))
 
 (enable-console-print!)
 
-(println "This text is printed from src/redwall/core.cljs. Go ahead and edit it and see reloading in action.")
+(def constants { :cells 2048})
 
-;; define your app data so that it doesn't get over-written on reload
-
-(defonce app-state (atom {:text "Hello world!"}))
-
-
-(defn hello-world []
+(defn render-machine []
   [:div
-   [:h1 (:text @app-state)]
-   [:h3 "Edit this and watch it change!"]])
+   [:center [:h1 "Redwall MARS"]]
+   (let [c 128
+         edge 0.05
+         size (- 1.0 edge)]
+     [:svg {:view-box (str "0 0 96 96") :width 1280 :height 768}
+      (for [i (range (constants :cells)) :let [x (mod i c) y (quot i c)] ]
+        [:g {:key (str "m" i)}
+         [:rect {:x (+ x edge) :y (+ y edge) :width size :height size :fill :grey}]])])])
 
-(reagent/render-component [hello-world]
-                          (. js/document (getElementById "app")))
+(r/render-component
+ [render-machine]
+ (. js/document (getElementById "app")))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
