@@ -1,0 +1,27 @@
+<assembly-file> = line+
+<line> = instruction? comment? <newline>
+<newline> = #'\n|$'
+comment = <';'> #'[^\n]*'
+instruction =
+        label* 'END' |
+        label* operation address |
+        label* operation address <','> address
+label = #'[a-zA-Z_][a-zA-Z0-9_]*'
+operation = opcode | opcode <'.'> modifier
+<opcode> =
+        'DAT' | 'MOV' | 'ADD' | 'SUB' | 'MUL' | 'DIV' | 'MOD' |
+        'JMP' | 'JMZ' | 'JMN' | 'DJN' | 'CMP' | 'SLT' | 'SPL' |
+        'ORG' | 'EQU'
+<modifier> = 'A' | 'B' | 'AB' | 'BA' | 'F' | 'X' | 'I'
+address = mode? expr
+<mode> = '#' | '$' | '@' | '<' | '>'
+expr =
+        term |
+        term '+' expr | term '-' expr |
+        term '*' expr | term '/' expr |
+        term '%' expr
+term = label | number | group
+group = <'('> expr <')'>
+number = whole-number | signed-integer
+signed-integer = '+' whole-number | '-' whole-number
+<whole-number> = #'[0-9]+'
