@@ -2,17 +2,16 @@
 <line> = instruction? comment? <newline>
 <newline> = #'\n|$'
 comment = <';'> #'[^\n]*'
-instruction =
-        label* 'END' |
-        label* operation address |
-        label* operation address <','> address
+instruction = label-ref? operation args
+label-ref = label* <':'?>
 label = #'[a-zA-Z_][a-zA-Z0-9_]*'
 operation = opcode | opcode <'.'> modifier
 <opcode> =
         'DAT' | 'MOV' | 'ADD' | 'SUB' | 'MUL' | 'DIV' | 'MOD' |
         'JMP' | 'JMZ' | 'JMN' | 'DJN' | 'CMP' | 'SLT' | 'SPL' |
-        'ORG' | 'EQU'
+        'ORG' | 'EQU' | 'END'
 <modifier> = 'A' | 'B' | 'AB' | 'BA' | 'F' | 'X' | 'I'
+args = address? | address <','> address
 address = mode? expr
 <mode> = '#' | '$' | '@' | '<' | '>'
 expr =
