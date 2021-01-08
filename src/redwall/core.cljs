@@ -1,5 +1,6 @@
 (ns redwall.core
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [reagent.dom :as rdom]))
 
 (enable-console-print!)
 
@@ -33,9 +34,7 @@
    [:center [:h1 "Redwall MARS"]]
    (render-machine)])
 
-(r/render-component
- [render]
- (. js/document (getElementById "app")))
+(rdom/render [render] (.getElementById js/document "app"))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

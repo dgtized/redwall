@@ -1,0 +1,6 @@
+{:main redwall.core
+ :clean-outputs true
+ :optimizations :advanced
+ :output-to "target/public/js/redwall.js"
+ :output-dir "target/public/js"
+ :source-map "target/public/js/redwall.js.map"}
