@@ -11,7 +11,7 @@ operation = opcode | opcode <'.'> modifier
         'JMP' | 'JMZ' | 'JMN' | 'DJN' | 'CMP' | 'SEQ' | 'SLT' | 'SNE'
         'SPL' | 'ORG' | 'EQU' | 'END'
 <modifier> = 'A' | 'B' | 'AB' | 'BA' | 'F' | 'X' | 'I'
-args = address? | address <','> address
+<args> = address? | address <','> address
 address = mode? expr
 <mode> = '#' | '$' | '@' | '<' | '>'
 expr =
