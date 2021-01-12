@@ -4,11 +4,12 @@
 
 (enable-console-print!)
 
-(def constants {:cells 8000})
-(defonce machine (r/atom {:memory (make-array Integer/TYPE (constants :cells))}))
+(def constants {:cells 4096})
+(defonce machine
+  (r/atom {:memory (make-array (constants :cells))}))
 
 (defn show-memory [e]
-  (println (-> e .-currentTarget .-key)))
+  (println (-> e .-target .-id)))
 
 (defn program-color [instr]
   :lightgrey)
@@ -20,12 +21,15 @@
         edge 0.05
         size (- 1.0 edge)]
     [:svg {:view-box (str "0 0 " box " " box)
-           :on-mouse-over show-memory}
+           :on-mouse-over show-memory
+           :pointer-events "none"}
      (for [i (range cells)
            :let [x (mod i box) y (quot i box)] ]
        [:rect {:x (+ x edge) :y (+ y edge)
                :width size :height size
+               :pointer-events "auto"
                :key (str "m" i)
+               :id (str "m" i)
                :fill (program-color
                       (nth memory i))}])]))
 
@@ -34,7 +38,10 @@
    [:center [:h1 "Redwall MARS"]]
    (render-machine)])
 
-(rdom/render [render] (.getElementById js/document "app"))
+(defn start-page []
+  (rdom/render [render] (.getElementById js/document "app")))
+
+(defonce page (start-page))
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on
