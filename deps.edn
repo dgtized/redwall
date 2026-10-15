@@ -1,5 +1,5 @@
 {:deps {org.clojure/clojurescript {:mvn/version "1.12.145"}
         reagent/reagent {:mvn/version "1.0.0"}
         instaparse/instaparse {:mvn/version "1.4.10"}
-        com.bhauman/figwheel-main {:mvn/version "0.2.12"}}
+        com.bhauman/figwheel-main {:mvn/version "0.2.20"}}
  :paths ["src" "target" "resources"]}
