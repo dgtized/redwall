@@ -10,11 +10,11 @@ A reference implementation of [ICWS94](http://corewar.co.uk/standards/icws94.htm
 
 To get an interactive development environment run:
 
-    clojure -m figwheel.main -b dev -r
+    clojure -Mfig -m figwheel.main -b dev -r
 
 For an optimized production build:
 
-    clojure -m figwheel.main -bo release
+    clojure -Mfig -m figwheel.main -bo release
 
 ## References & Prior Art
 
